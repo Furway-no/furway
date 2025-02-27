@@ -1,29 +1,44 @@
+import { Media } from '@/payload-types'
 import clsx from 'clsx'
+import Image from 'next/image'
 import React from 'react'
 
 interface Props {
   className?: string
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
+  media: Media
+  maxHeight: number
 }
 
-export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
+export const Logo = ({
+  media,
+  maxHeight,
+  className,
+  loading = 'lazy',
+  priority = 'low',
+}: Props) => {
+  if (!media?.url) return null
 
-  const loading = loadingFromProps || 'lazy'
-  const priority = priorityFromProps || 'low'
+  const url = media.url.replace(/\/api\/media\/file\//, '/media/')
+  const width = media.width ?? undefined
+  const height = media.height ?? undefined
 
   return (
-    /* eslint-disable @next/next/no-img-element */
-    <img
-      alt="Payload Logo"
-      width={193}
-      height={34}
-      loading={loading}
-      fetchPriority={priority}
-      decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
-    />
+    <div className={clsx('relative flex items-center justify-center', className)}>
+      <div className="max-w-full w-auto h-auto overflow-hidden">
+        <Image
+          alt="Logo"
+          src={url}
+          width={width}
+          height={height}
+          layout="intrinsic"
+          loading={loading}
+          priority={priority === 'high'}
+          className="h-auto w-auto"
+          style={{ maxHeight: `${maxHeight}px` }}
+        />
+      </div>
+    </div>
   )
 }

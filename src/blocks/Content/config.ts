@@ -1,9 +1,9 @@
 import type { Block, Field } from 'payload'
 
 import {
+  EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
   HeadingFeature,
-  InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
@@ -13,7 +13,7 @@ const columnFields: Field[] = [
   {
     name: 'size',
     type: 'select',
-    defaultValue: 'oneThird',
+    defaultValue: 'full',
     options: [
       {
         label: 'One Third',
@@ -42,7 +42,7 @@ const columnFields: Field[] = [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
-          InlineToolbarFeature(),
+          EXPERIMENTAL_TableFeature(),
         ]
       },
     }),

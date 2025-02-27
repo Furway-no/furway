@@ -259,7 +259,7 @@ export interface Post {
  */
 export interface Media {
   id: number;
-  alt?: string | null;
+  alt: string;
   caption?: {
     root: {
       type: string;
@@ -1533,6 +1533,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: number;
+  title?: string | null;
+  media?: (number | null) | Media;
+  maxHeight: number;
   navItems?:
     | {
         link: {
@@ -1590,6 +1593,9 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  title?: T;
+  media?: T;
+  maxHeight?: T;
   navItems?:
     | T
     | {

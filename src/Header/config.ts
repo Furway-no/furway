@@ -10,6 +10,26 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      label: 'Website Title',
+      name: 'title',
+      type: 'text',
+      required: false,
+    },
+    {
+      label: 'Logo',
+      name: 'media',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
+      label: 'Max Logo Height',
+      name: 'maxHeight',
+      type: 'number',
+      defaultValue: 32,
+      required: true,
+    },
+    {
       name: 'navItems',
       type: 'array',
       fields: [
@@ -17,7 +37,7 @@ export const Header: GlobalConfig = {
           appearances: false,
         }),
       ],
-      maxRows: 6,
+      maxRows: 6, // max allowed links in header
       admin: {
         initCollapsed: true,
         components: {
