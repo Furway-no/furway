@@ -30,7 +30,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   const mediaObject: Media | undefined =
     typeof data.media === 'object' && data.media !== null ? data.media : undefined
-  console.log(mediaObject)
 
   const hasContent = Boolean(mediaObject || data.title)
 
@@ -39,7 +38,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       <div className="py-8 flex justify-between">
         {hasContent ? (
           <div className="flex items-center gap-4">
-            <Logo media={mediaObject!} maxHeight={data.maxHeight} />
+            <Logo media={mediaObject!} maxHeight={data.maxHeight || 64} />
             {data.title && <h1 className="text-xl font-bold">{data.title}</h1>}
           </div>
         ) : (

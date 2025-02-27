@@ -1535,7 +1535,7 @@ export interface Header {
   id: number;
   title?: string | null;
   media?: (number | null) | Media;
-  maxHeight: number;
+  maxHeight?: number | null;
   navItems?:
     | {
         link: {

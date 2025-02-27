@@ -26,6 +26,10 @@ export default buildConfig({
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
+      graphics: {
+        Logo: '@/components/EmptyDiv/EmptyDiv',
+        Icon: '@/components/EmptyDiv/EmptyDiv',
+      },
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -82,8 +86,9 @@ export default buildConfig({
         // If there is no logged in user, then check
         // for the Vercel Cron secret to be present as an
         // Authorization header:
-        const authHeader = req.headers.get('authorization')
-        return authHeader === `Bearer ${process.env.CRON_SECRET}`
+        // const authHeader = req.headers.get('authorization')
+        // return authHeader === `Bearer ${process.env.CRON_SECRET}`
+        return false
       },
     },
     tasks: [],

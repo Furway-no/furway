@@ -27,7 +27,7 @@ export const Header: GlobalConfig = {
       name: 'maxHeight',
       type: 'number',
       defaultValue: 32,
-      required: true,
+      required: false,
     },
     {
       name: 'navItems',
