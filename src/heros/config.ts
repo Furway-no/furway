@@ -39,6 +39,20 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'backgroundOpacity',
+      type: 'number',
+      label: 'Background Opacity %',
+      defaultValue: 0,
+      min: 0,
+      max: 100,
+      required: true,
+      admin: {
+        condition: (_, { type } = {}) => ['highImpact'].includes(type),
+        position: 'sidebar',
+        readOnly: false,
+      },
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({
