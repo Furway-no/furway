@@ -190,7 +190,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | ProfileGridBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -727,6 +727,34 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProfileGridBlock".
+ */
+export interface ProfileGridBlock {
+  heading?: string | null;
+  items?:
+    | {
+        title?: string | null;
+        slotsFilled?: string | null;
+        description?: string | null;
+        volunteers?:
+          | {
+              name?: string | null;
+              role?: string | null;
+              url?: string | null;
+              bio?: string | null;
+              profilePicture?: (number | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'profileGridBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1015,6 +1043,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        profileGridBlock?: T | ProfileGridBlockSelect<T>;
       };
   meta?:
     | T
@@ -1111,6 +1140,33 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProfileGridBlock_select".
+ */
+export interface ProfileGridBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        slotsFilled?: T;
+        description?: T;
+        volunteers?:
+          | T
+          | {
+              name?: T;
+              role?: T;
+              url?: T;
+              bio?: T;
+              profilePicture?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
