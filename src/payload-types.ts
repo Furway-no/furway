@@ -201,6 +201,7 @@ export interface Page {
     description?: string | null;
   };
   publishedAt?: string | null;
+  publishedBy?: (number | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -374,6 +375,7 @@ export interface Category {
 export interface User {
   id: number;
   name?: string | null;
+  role: 'admin' | 'developer' | 'teamLead' | 'volunteer' | 'user';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1055,6 +1057,7 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  publishedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1322,6 +1325,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

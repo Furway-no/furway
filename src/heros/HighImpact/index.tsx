@@ -14,11 +14,11 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   richText,
   backgroundOpacity,
 }) => {
-  const { setHeaderTheme } = useHeaderTheme()
+  // const { setHeaderTheme } = useHeaderTheme()
 
-  useEffect(() => {
-    setHeaderTheme('dark')
-  })
+  //  useEffect(() => {
+  //    setHeaderTheme('dark')
+  //  })
 
   const opacityValue = Math.min(100, Math.max(0, backgroundOpacity ?? 100)) / 100
 
