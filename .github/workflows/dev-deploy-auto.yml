@@ -69,27 +69,3 @@ jobs:
             CRON_SECRET=${{ secrets.CRON_SECRET }}
             PREVIEW_SECRET=${{ secrets.PREVIEW_SECRET }}
             NEXT_PUBLIC_SERVER_URL=${{ secrets.NEXT_PUBLIC_SERVER_URL }}
-
-      - name: Trigger deployment webhook
-        run: |
-          IS_FAILED_DEPLOY=1
-          for i in {1..10}; do
-            echo "Attempt $i to trigger deployment webhook..."
-            curl -X POST -H "Content-Type: application/json" \
-              -H "X-Hub-Signature: ${{ secrets.WEBHOOK_DEPLOY_SECRET }}" \
-              -d '{"event": "redeploy"}' \
-              ${{ secrets.WEBHOOK_DEPLOY_URL }}
-            CURL_EXIT_CODE=$?
-            if [ $CURL_EXIT_CODE -eq 0 ]; then
-              echo "Deployment webhook triggered successfully."
-              IS_FAILED_DEPLOY=0
-              break
-            fi
-            echo "Failed attempt $i, retrying in 5 seconds..."
-            sleep 5
-          done
-
-          if [ $IS_FAILED_DEPLOY -ne 0 ]; then
-            echo "Failed to trigger deployment webhook after 10 attempts."
-            exit 1
-          fi
