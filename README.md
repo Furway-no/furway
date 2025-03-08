@@ -11,6 +11,7 @@
 ## How to Contribute
 
 Contributions are welcome! However, **please open an issue first to discuss what you would like to change**. There is nothing worse than spending time on a PR that won't get accepted.
+Once the issue have been approved; fork the project, create a branch, and submit a PR once it is ready to be reviewed.
 
 Besides that, please do your best to follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. This will help us keep a consistent and readable commit history.
 
@@ -73,3 +74,20 @@ pnpm dev
 **Open the application:**
 
 http://localhost:3000
+
+### Build Dockerfile locally
+
+This will automatically load the .env file and build the image container named `furway-dev`.
+
+```sh
+export $(grep -v '^#' .env | xargs) && \
+docker build $(grep -v '^#' .env | xargs -I {} echo "--build-arg {}") -t furway-dev .
+```
+
+### Run in Docker
+
+> Make sure you have the `.env` file created and populated with the correct values.
+
+```sh
+docker run --env-file .env -p 3000:3000 furway-dev
+```
