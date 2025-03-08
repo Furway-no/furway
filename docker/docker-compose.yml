@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:16
-    container_name: furway_postgres_local
+    container_name: furway_postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: unsecureuser
@@ -13,6 +13,12 @@ services:
       - '5432:5432'
     volumes:
       - pg_data:/var/lib/postgresql/data
+    networks:
+      - nginx-proxy-manager_default
 
 volumes:
   pg_data:
+
+networks:
+  nginx-proxy-manager_default:
+    external: true
