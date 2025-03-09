@@ -2,6 +2,7 @@ name: 'DEV: Deploy'
 on:
   push:
     paths-ignore:
+      - '.env.example'
       - 'node_modules/**/*'
       - '.next/**/*'
       - '**/*.env'
