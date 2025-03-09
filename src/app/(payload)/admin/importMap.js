@@ -23,6 +23,7 @@ import { RowLabel as RowLabel_ec255a65fa6fa8d1faeb09cf35284224 } from "@/Header/
 import { RowLabel as RowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from "@/Footer/RowLabel";
 import { default as default_ed514d70d0bfd8ea203c1783430fc429 } from "@/components/EmptyDiv/EmptyDiv";
 import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from "@/components/BeforeLogin";
+import { UploadthingClientUploadHandler as UploadthingClientUploadHandler_749dcaa11bb61b873d113cb6c609bc10 } from "@payloadcms/storage-uploadthing/client";
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell":
@@ -68,4 +69,6 @@ export const importMap = {
   "@/Footer/RowLabel#RowLabel": RowLabel_1f6ff6ff633e3695d348f4f3c58f1466,
   "@/components/EmptyDiv/EmptyDiv#default": default_ed514d70d0bfd8ea203c1783430fc429,
   "@/components/BeforeLogin#default": default_8a7ab0eb7ab5c511aba12e68480bfe5e,
+  "@payloadcms/storage-uploadthing/client#UploadthingClientUploadHandler":
+    UploadthingClientUploadHandler_749dcaa11bb61b873d113cb6c609bc10,
 };

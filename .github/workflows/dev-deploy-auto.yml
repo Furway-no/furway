@@ -70,3 +70,4 @@ jobs:
             CRON_SECRET=${{ secrets.CRON_SECRET }}
             PREVIEW_SECRET=${{ secrets.PREVIEW_SECRET }}
             NEXT_PUBLIC_SERVER_URL=${{ secrets.NEXT_PUBLIC_SERVER_URL }}
+            UPLOADTHING_TOKEN=${{ secrets.UPLOADTHING_TOKEN }}
