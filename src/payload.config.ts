@@ -1,33 +1,33 @@
 // storage-adapter-import-placeholder
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import { postgresAdapter } from "@payloadcms/db-postgres";
 
-import sharp from 'sharp' // sharp-import
-import path from 'path'
-import { buildConfig, PayloadRequest } from 'payload'
-import { fileURLToPath } from 'url'
+import sharp from "sharp"; // sharp-import
+import path from "path";
+import { buildConfig, PayloadRequest } from "payload";
+import { fileURLToPath } from "url";
 
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
-import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
-import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
+import { Categories } from "./collections/Categories";
+import { Media } from "./collections/Media";
+import { Pages } from "./collections/Pages";
+import { Posts } from "./collections/Posts";
+import { Users } from "./collections/Users";
+import { Footer } from "./Footer/config";
+import { Header } from "./Header/config";
+import { plugins } from "./plugins";
+import { defaultLexical } from "@/fields/defaultLexical";
+import { getServerSideURL } from "./utilities/getURL";
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      beforeLogin: ['@/components/BeforeLogin'],
+      beforeLogin: ["@/components/BeforeLogin"],
       graphics: {
-        Logo: '@/components/EmptyDiv/EmptyDiv',
-        Icon: '@/components/EmptyDiv/EmptyDiv',
+        Logo: "@/components/EmptyDiv/EmptyDiv",
+        Icon: "@/components/EmptyDiv/EmptyDiv",
       },
     },
     importMap: {
@@ -37,20 +37,20 @@ export default buildConfig({
     livePreview: {
       breakpoints: [
         {
-          label: 'Mobile',
-          name: 'mobile',
+          label: "Mobile",
+          name: "mobile",
           width: 375,
           height: 667,
         },
         {
-          label: 'Tablet',
-          name: 'tablet',
+          label: "Tablet",
+          name: "tablet",
           width: 768,
           height: 1024,
         },
         {
-          label: 'Desktop',
-          name: 'desktop',
+          label: "Desktop",
+          name: "desktop",
           width: 1440,
           height: 900,
         },
@@ -61,7 +61,7 @@ export default buildConfig({
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.DATABASE_URI || "",
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
@@ -74,22 +74,22 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   jobs: {
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {
         // Allow logged in users to execute this endpoint (default)
-        if (req.user) return true
+        if (req.user) return true;
 
         // If there is no logged in user, then check
         // for the Vercel Cron secret to be present as an
         // Authorization header:
         // const authHeader = req.headers.get('authorization')
         // return authHeader === `Bearer ${process.env.CRON_SECRET}`
-        return false
+        return false;
       },
     },
     tasks: [],
   },
-})
+});

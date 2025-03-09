@@ -1,53 +1,53 @@
-import { Block } from 'payload'
+import { Block } from "payload";
 
 export const ProfileGrid: Block = {
-  slug: 'profileGridBlock',
-  interfaceName: 'ProfileGridBlock',
+  slug: "profileGridBlock",
+  interfaceName: "ProfileGridBlock",
   fields: [
     {
-      name: 'heading',
-      type: 'text',
+      name: "heading",
+      type: "text",
     },
     {
-      name: 'items',
-      type: 'array',
+      name: "items",
+      type: "array",
       fields: [
         {
-          name: 'title',
-          type: 'text',
+          name: "title",
+          type: "text",
         },
         {
-          name: 'slotsFilled',
-          type: 'text',
+          name: "slotsFilled",
+          type: "text",
         },
         {
-          name: 'description',
-          type: 'text',
+          name: "description",
+          type: "text",
         },
         {
-          name: 'volunteers',
-          type: 'array',
+          name: "volunteers",
+          type: "array",
           fields: [
             {
-              name: 'name',
-              type: 'text',
+              name: "name",
+              type: "text",
             },
             {
-              name: 'role',
-              type: 'text',
+              name: "role",
+              type: "text",
             },
             {
-              name: 'url',
-              type: 'text',
+              name: "url",
+              type: "text",
             },
             {
-              name: 'bio',
-              type: 'text',
+              name: "bio",
+              type: "text",
             },
             {
-              name: 'profilePicture',
-              type: 'upload',
-              relationTo: 'media',
+              name: "profilePicture",
+              type: "upload",
+              relationTo: "media",
             },
           ],
         },
@@ -55,7 +55,7 @@ export const ProfileGrid: Block = {
     },
   ],
   labels: {
-    singular: 'Profile Grid',
-    plural: 'Profile Grids',
+    singular: "Profile Grid",
+    plural: "Profile Grids",
   },
-}
+};

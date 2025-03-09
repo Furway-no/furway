@@ -1,37 +1,37 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalConfig } from "payload";
 
-import { link } from '@/fields/link'
-import { revalidateHeader } from './hooks/revalidateHeader'
+import { link } from "@/fields/link";
+import { revalidateHeader } from "./hooks/revalidateHeader";
 
 export const Header: GlobalConfig = {
-  slug: 'header',
+  slug: "header",
   access: {
     read: () => true,
   },
   fields: [
     {
-      label: 'Website Title',
-      name: 'title',
-      type: 'text',
+      label: "Website Title",
+      name: "title",
+      type: "text",
       required: false,
     },
     {
-      label: 'Logo',
-      name: 'media',
-      type: 'upload',
-      relationTo: 'media',
+      label: "Logo",
+      name: "media",
+      type: "upload",
+      relationTo: "media",
       required: false,
     },
     {
-      label: 'Max Logo Height',
-      name: 'maxHeight',
-      type: 'number',
+      label: "Max Logo Height",
+      name: "maxHeight",
+      type: "number",
       defaultValue: 32,
       required: false,
     },
     {
-      name: 'navItems',
-      type: 'array',
+      name: "navItems",
+      type: "array",
       fields: [
         link({
           appearances: false,
@@ -41,7 +41,7 @@ export const Header: GlobalConfig = {
       admin: {
         initCollapsed: true,
         components: {
-          RowLabel: '@/Header/RowLabel#RowLabel',
+          RowLabel: "@/Header/RowLabel#RowLabel",
         },
       },
     },
@@ -49,4 +49,4 @@ export const Header: GlobalConfig = {
   hooks: {
     afterChange: [revalidateHeader],
   },
-}
+};

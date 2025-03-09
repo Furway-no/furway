@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import type { Header as HeaderType } from '@/payload-types'
+import React, { useState } from "react";
+import type { Header as HeaderType } from "@/payload-types";
 
-import { CMSLink } from '@/components/Link'
-import Link from 'next/link'
-import { SearchIcon, MenuIcon, X } from 'lucide-react'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { CMSLink } from "@/components/Link";
+import Link from "next/link";
+import { SearchIcon, MenuIcon, X } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const navItems = data?.navItems || []
+  const [isOpen, setIsOpen] = useState(false);
+  const navItems = data?.navItems || [];
 
   return (
     <nav className="flex items-center gap-4">
@@ -49,5 +49,5 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       </Link>
       */}
     </nav>
-  )
-}
+  );
+};

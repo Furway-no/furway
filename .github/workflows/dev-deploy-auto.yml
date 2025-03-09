@@ -1,27 +1,27 @@
-name: 'DEV: Deploy'
+name: "DEV: Deploy"
 on:
   push:
     paths-ignore:
-      - '.env.example'
-      - 'node_modules/**/*'
-      - '.next/**/*'
-      - '**/*.env'
-      - '**/package.json'
-      - '**/*.log'
-      - 'coverage/**/*'
-      - 'dist/**/*'
-      - '**/*.DS_Store'
-      - 'tmp/**/*'
-      - 'temp/**/*'
-      - '.cache/**/*'
-      - '**/*.tar.gz'
-      - '.vscode/**/*'
-      - '**/*.swp'
-      - '**/*~'
-      - '**/*.lock'
-      - '**/*.md'
-      - '**/*.mdx'
-    branches: ['dev']
+      - ".env.example"
+      - "node_modules/**/*"
+      - ".next/**/*"
+      - "**/*.env"
+      - "**/package.json"
+      - "**/*.log"
+      - "coverage/**/*"
+      - "dist/**/*"
+      - "**/*.DS_Store"
+      - "tmp/**/*"
+      - "temp/**/*"
+      - ".cache/**/*"
+      - "**/*.tar.gz"
+      - ".vscode/**/*"
+      - "**/*.swp"
+      - "**/*~"
+      - "**/*.lock"
+      - "**/*.md"
+      - "**/*.mdx"
+    branches: ["dev"]
 
 jobs:
   build:
@@ -29,10 +29,10 @@ jobs:
     environment: dev
     runs-on: ubuntu-latest
     env:
-      TAG: 'dev'
-      REGISTRY: 'ghcr.io'
-      REPOSITORY_OWNER: '${{ github.repository_owner }}'
-      IMG_NAME: 'furway'
+      TAG: "dev"
+      REGISTRY: "ghcr.io"
+      REPOSITORY_OWNER: "${{ github.repository_owner }}"
+      IMG_NAME: "furway"
     steps:
       - name: Checkout
         uses: actions/checkout@v4

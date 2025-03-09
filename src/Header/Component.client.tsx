@@ -1,40 +1,40 @@
-'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
-import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+"use client";
+import { useHeaderTheme } from "@/providers/HeaderTheme";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-import type { Header, Media } from '@/payload-types'
+import type { Header, Media } from "@/payload-types";
 
-import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav } from './Nav'
+import { Logo } from "@/components/Logo/Logo";
+import { HeaderNav } from "./Nav";
 
 interface HeaderClientProps {
-  data: Header
+  data: Header;
 }
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   /* Storing the value in a useState to avoid hydration errors */
-  const [theme, setTheme] = useState<string | null>(null)
-  const { headerTheme, setHeaderTheme } = useHeaderTheme()
-  const pathname = usePathname()
+  const [theme, setTheme] = useState<string | null>(null);
+  const { headerTheme, setHeaderTheme } = useHeaderTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
-    setHeaderTheme(null)
+    setHeaderTheme(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [pathname]);
 
   useEffect(() => {
-    if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
+    if (headerTheme && headerTheme !== theme) setTheme(headerTheme);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerTheme])
+  }, [headerTheme]);
 
   const mediaObject: Media | undefined =
-    typeof data.media === 'object' && data.media !== null ? data.media : undefined
+    typeof data.media === "object" && data.media !== null ? data.media : undefined;
 
-  const hasContent = Boolean(mediaObject || data.title)
+  const hasContent = Boolean(mediaObject || data.title);
 
   return (
-    <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
+    <header className="container relative z-20   " {...(theme ? { "data-theme": theme } : {})}>
       <div className="py-8 flex justify-between">
         {hasContent ? (
           <div className="flex items-center gap-4">
@@ -47,5 +47,5 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <HeaderNav data={data} />
       </div>
     </header>
-  )
-}
+  );
+};

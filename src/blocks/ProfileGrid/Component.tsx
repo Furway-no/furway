@@ -1,19 +1,19 @@
-import type { ProfileGridBlock as ProfileGridBlockProps } from '@/payload-types'
-import Image from 'next/image'
-import React from 'react'
+import type { ProfileGridBlock as ProfileGridBlockProps } from "@/payload-types";
+import Image from "next/image";
+import React from "react";
 
 export const ProfileGridBlock: React.FC<ProfileGridBlockProps> = ({ heading, items }) => {
   const getUsernameFromUrl = (url: string): string | null => {
     try {
-      const urlObj = new URL(url)
-      if (urlObj.hostname === 't.me' && urlObj.pathname) {
-        return urlObj.pathname.replace('/', '')
+      const urlObj = new URL(url);
+      if (urlObj.hostname === "t.me" && urlObj.pathname) {
+        return urlObj.pathname.replace("/", "");
       }
-      return null
+      return null;
     } catch {
-      return null
+      return null;
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -37,7 +37,7 @@ export const ProfileGridBlock: React.FC<ProfileGridBlockProps> = ({ heading, ite
             <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
               {(item.volunteers || []).map((vol, volIdx) => {
                 const imageSrc =
-                  typeof vol.profilePicture === 'object' ? vol.profilePicture?.url : ''
+                  typeof vol.profilePicture === "object" ? vol.profilePicture?.url : "";
                 return (
                   <div
                     key={volIdx}
@@ -46,7 +46,7 @@ export const ProfileGridBlock: React.FC<ProfileGridBlockProps> = ({ heading, ite
                     {imageSrc && (
                       <Image
                         src={imageSrc}
-                        alt={vol.name || ''}
+                        alt={vol.name || ""}
                         width={250}
                         height={250}
                         className="rounded-full object-cover mb-2"
@@ -62,16 +62,16 @@ export const ProfileGridBlock: React.FC<ProfileGridBlockProps> = ({ heading, ite
                         rel="noopener noreferrer"
                         className="mt-2 text-sm underline hover:no-underline"
                       >
-                        @{getUsernameFromUrl(vol.url) || 'Contact'}
+                        @{getUsernameFromUrl(vol.url) || "Contact"}
                       </a>
                     )}
                   </div>
-                )
+                );
               })}
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const BeforeLogin: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const BeforeLogin: React.FC = () => {
         <b>Admins can login here! :3</b>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default BeforeLogin
+export default BeforeLogin;

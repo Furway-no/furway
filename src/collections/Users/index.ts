@@ -1,10 +1,10 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from "payload";
 
-import { administrator } from '@/access/administrator'
-import { authenticated } from '@/access/authenticated'
+import { administrator } from "@/access/administrator";
+import { authenticated } from "@/access/authenticated";
 
 export const Users: CollectionConfig = {
-  slug: 'users',
+  slug: "users",
   access: {
     admin: administrator,
     create: administrator,
@@ -13,43 +13,43 @@ export const Users: CollectionConfig = {
     update: administrator,
   },
   admin: {
-    defaultColumns: ['name', 'email'],
-    useAsTitle: 'name',
+    defaultColumns: ["name", "email"],
+    useAsTitle: "name",
   },
   auth: true,
   fields: [
     {
-      name: 'name',
-      type: 'text',
+      name: "name",
+      type: "text",
     },
     {
-      name: 'role',
-      type: 'select',
+      name: "role",
+      type: "select",
       options: [
         {
-          label: 'Admin', // FULL ACCESS
-          value: 'admin',
+          label: "Admin", // FULL ACCESS
+          value: "admin",
         },
         {
-          label: 'Developer', // Debugging and testing role
-          value: 'developer',
+          label: "Developer", // Debugging and testing role
+          value: "developer",
         },
         {
-          label: 'Team Lead',
-          value: 'teamLead',
+          label: "Team Lead",
+          value: "teamLead",
         },
         {
-          label: 'Volunteer',
-          value: 'volunteer',
+          label: "Volunteer",
+          value: "volunteer",
         },
         {
-          label: 'User',
-          value: 'user',
+          label: "User",
+          value: "user",
         },
       ],
-      defaultValue: 'user',
+      defaultValue: "user",
       required: true,
     },
   ],
   timestamps: true,
-}
+};
