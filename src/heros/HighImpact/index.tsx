@@ -48,6 +48,7 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({
             priority
             resource={media}
             opacity={opacityValue}
+            size="100vw"
           />
         )}
       </div>
