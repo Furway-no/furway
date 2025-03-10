@@ -54,11 +54,6 @@ export default async function Page({ params: paramsPromise }: Args) {
     slug,
   });
 
-  // Remove this code once your website is seeded
-  if (!page && slug === "home") {
-    page = homeStatic;
-  }
-
   if (!page) {
     return <PayloadRedirects url={url} />;
   }
@@ -68,7 +63,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <article className="pt-16 pb-24">
       <PageClient />
-      {/* Allows redirects for valid pages too */}
+
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
