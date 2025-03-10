@@ -1,5 +1,5 @@
-import tailwindcssAnimate from "tailwindcss-animate";
 import typography from "@tailwindcss/typography";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -70,6 +70,7 @@ const config = {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+        error: "hsl(var(--error))",
         foreground: "hsl(var(--foreground))",
         input: "hsl(var(--input))",
         muted: {
@@ -90,7 +91,6 @@ const config = {
           foreground: "hsl(var(--secondary-foreground))",
         },
         success: "hsl(var(--success))",
-        error: "hsl(var(--error))",
         warning: "hsl(var(--warning))",
       },
       fontFamily: {

@@ -1,11 +1,11 @@
 "use client";
 
+import { MenuIcon } from "lucide-react";
 import React, { useState } from "react";
-import type { Header as HeaderType } from "@/payload-types";
 
 import { CMSLink } from "@/components/Link";
-import { MenuIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import type { Header as HeaderType } from "@/payload-types";
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);

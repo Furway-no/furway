@@ -3,8 +3,8 @@ const redirects = async () => {
     destination: "/ie-incompatible.html",
     has: [
       {
-        type: "header",
         key: "user-agent",
+        type: "header",
         value: "(.*Trident.*)", // all ie browsers
       },
     ],

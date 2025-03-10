@@ -4,7 +4,6 @@ import { administrator } from "@/access/administrator";
 import { authenticated } from "@/access/authenticated";
 
 export const Users: CollectionConfig = {
-  slug: "users",
   access: {
     admin: administrator,
     create: administrator,
@@ -23,8 +22,8 @@ export const Users: CollectionConfig = {
       type: "text",
     },
     {
+      defaultValue: "user",
       name: "role",
-      type: "select",
       options: [
         {
           label: "Admin", // FULL ACCESS
@@ -47,9 +46,10 @@ export const Users: CollectionConfig = {
           value: "user",
         },
       ],
-      defaultValue: "user",
       required: true,
+      type: "select",
     },
   ],
+  slug: "users",
   timestamps: true,
 };

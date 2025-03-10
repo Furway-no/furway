@@ -20,9 +20,9 @@ const nextConfig = {
       }),
     ],
   },
+  output: "standalone",
   reactStrictMode: true,
   redirects,
-  output: "standalone",
 };
 
 export default withPayload(nextConfig);

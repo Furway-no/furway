@@ -9,14 +9,14 @@ export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc 
 
   const modifiedDoc: DocToSync = {
     ...searchDoc,
-    slug,
+    categories: [],
     meta: {
       ...meta,
-      title: meta?.title || title,
-      image: meta?.image?.id || meta?.image,
       description: meta?.description,
+      image: meta?.image?.id || meta?.image,
+      title: meta?.title || title,
     },
-    categories: [],
+    slug,
   };
 
   if (categories && Array.isArray(categories) && categories.length > 0) {
@@ -26,8 +26,8 @@ export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc 
         const { id, title } = category;
 
         return {
-          relationTo: "categories",
           id,
+          relationTo: "categories",
           title,
         };
       });

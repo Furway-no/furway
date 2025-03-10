@@ -1,21 +1,20 @@
-import type { CollectionConfig } from "payload";
-
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import path from "path";
+import type { CollectionConfig } from "payload";
 import { fileURLToPath } from "url";
 
-import { anyone } from "../access/anyone";
 import { administrator } from "@/access/administrator";
+
+import { anyone } from "../access/anyone";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export const Media: CollectionConfig = {
-  slug: "media",
   access: {
     create: administrator,
     delete: administrator,
@@ -25,33 +24,34 @@ export const Media: CollectionConfig = {
   fields: [
     {
       name: "alt",
-      type: "text",
       required: true,
+      type: "text",
     },
     {
-      name: "caption",
-      type: "richText",
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
           return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()];
         },
       }),
+      name: "caption",
+      type: "richText",
     },
   ],
+  slug: "media",
   upload: {
-    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, "../../public/media"),
     adminThumbnail: "thumbnail",
+
     focalPoint: true,
+
     imageSizes: [
       {
         name: "thumbnail",
         width: 300,
       },
       {
+        height: 500,
         name: "square",
         width: 500,
-        height: 500,
       },
       {
         name: "small",
@@ -70,11 +70,13 @@ export const Media: CollectionConfig = {
         width: 1920,
       },
       {
+        crop: "center",
+        height: 630,
         name: "og",
         width: 1200,
-        height: 630,
-        crop: "center",
       },
     ],
+    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
+    staticDir: path.resolve(dirname, "../../public/media"),
   },
 };

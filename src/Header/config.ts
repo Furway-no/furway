@@ -1,10 +1,10 @@
 import type { GlobalConfig } from "payload";
 
 import { link } from "@/fields/link";
+
 import { revalidateHeader } from "./hooks/revalidateHeader";
 
 export const Header: GlobalConfig = {
-  slug: "header",
   access: {
     read: () => true,
   },
@@ -12,41 +12,46 @@ export const Header: GlobalConfig = {
     {
       label: "Website Title",
       name: "title",
-      type: "text",
       required: false,
+      type: "text",
     },
     {
       label: "Logo",
       name: "media",
-      type: "upload",
       relationTo: "media",
       required: false,
+      type: "upload",
     },
     {
+      defaultValue: 32,
       label: "Max Logo Height",
       name: "maxHeight",
-      type: "number",
-      defaultValue: 32,
       required: false,
+      type: "number",
     },
     {
-      name: "navItems",
-      type: "array",
+      // max allowed links in header
+      admin: {
+        components: {
+          RowLabel: "@/Header/RowLabel#RowLabel",
+        },
+        initCollapsed: true,
+      },
+
       fields: [
         link({
           appearances: false,
         }),
       ],
-      maxRows: 6, // max allowed links in header
-      admin: {
-        initCollapsed: true,
-        components: {
-          RowLabel: "@/Header/RowLabel#RowLabel",
-        },
-      },
+
+      maxRows: 6,
+
+      name: "navItems",
+      type: "array",
     },
   ],
   hooks: {
     afterChange: [revalidateHeader],
   },
+  slug: "header",
 };

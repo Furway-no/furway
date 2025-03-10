@@ -1,4 +1,3 @@
-import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
@@ -11,15 +10,15 @@ import {
   RichText as RichTextWithoutBlocks,
 } from "@payloadcms/richtext-lexical/react";
 
+import { BannerBlock } from "@/blocks/Banner/Component";
+import { CallToActionBlock } from "@/blocks/CallToAction/Component";
 import { CodeBlock, CodeBlockProps } from "@/blocks/Code/Component";
-
+import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
 } from "@/payload-types";
-import { BannerBlock } from "@/blocks/Banner/Component";
-import { CallToActionBlock } from "@/blocks/CallToAction/Component";
 import { cn } from "@/utilities/ui";
 
 type NodeTypes =
@@ -40,6 +39,8 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   ...LinkJSXConverter({ internalDocToHref }),
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
+    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
     mediaBlock: ({ node }) => (
       <MediaBlock
         className="col-start-1 col-span-3"
@@ -50,8 +51,6 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         disableInnerContainer={true}
       />
     ),
-    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
-    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
   },
 });
 

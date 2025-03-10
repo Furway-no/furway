@@ -1,5 +1,3 @@
-import type { Block, Field } from "payload";
-
 import {
   EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
@@ -7,14 +5,14 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
+import type { Block, Field } from "payload";
 
 import { link } from "@/fields/link";
 
 const columnFields: Field[] = [
   {
-    name: "size",
-    type: "select",
     defaultValue: "full",
+    name: "size",
     options: [
       {
         label: "One Third",
@@ -33,10 +31,9 @@ const columnFields: Field[] = [
         value: "full",
       },
     ],
+    type: "select",
   },
   {
-    name: "richText",
-    type: "richText",
     editor: lexicalEditor({
       features: ({ rootFeatures }) => {
         return [
@@ -49,6 +46,8 @@ const columnFields: Field[] = [
       },
     }),
     label: false,
+    name: "richText",
+    type: "richText",
   },
   {
     name: "enableLink",
@@ -64,16 +63,16 @@ const columnFields: Field[] = [
 ];
 
 export const Content: Block = {
-  slug: "content",
-  interfaceName: "ContentBlock",
   fields: [
     {
-      name: "columns",
-      type: "array",
       admin: {
         initCollapsed: true,
       },
       fields: columnFields,
+      name: "columns",
+      type: "array",
     },
   ],
+  interfaceName: "ContentBlock",
+  slug: "content",
 };

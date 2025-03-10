@@ -1,16 +1,12 @@
 import { Block } from "payload";
 
 export const ProfileGrid: Block = {
-  slug: "profileGridBlock",
-  interfaceName: "ProfileGridBlock",
   fields: [
     {
       name: "heading",
       type: "text",
     },
     {
-      name: "items",
-      type: "array",
       fields: [
         {
           name: "title",
@@ -25,8 +21,6 @@ export const ProfileGrid: Block = {
           type: "text",
         },
         {
-          name: "volunteers",
-          type: "array",
           fields: [
             {
               name: "name",
@@ -46,16 +40,22 @@ export const ProfileGrid: Block = {
             },
             {
               name: "profilePicture",
-              type: "upload",
               relationTo: "media",
+              type: "upload",
             },
           ],
+          name: "volunteers",
+          type: "array",
         },
       ],
+      name: "items",
+      type: "array",
     },
   ],
+  interfaceName: "ProfileGridBlock",
   labels: {
-    singular: "Profile Grid",
     plural: "Profile Grids",
+    singular: "Profile Grid",
   },
+  slug: "profileGridBlock",
 };

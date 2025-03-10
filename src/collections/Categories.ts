@@ -1,11 +1,11 @@
 import type { CollectionConfig } from "payload";
 
-import { anyone } from "../access/anyone";
-import { slugField } from "@/fields/slug";
 import { administrator } from "@/access/administrator";
+import { slugField } from "@/fields/slug";
+
+import { anyone } from "../access/anyone";
 
 export const Categories: CollectionConfig = {
-  slug: "categories",
   access: {
     create: administrator,
     delete: administrator,
@@ -18,9 +18,10 @@ export const Categories: CollectionConfig = {
   fields: [
     {
       name: "title",
-      type: "text",
       required: true,
+      type: "text",
     },
     ...slugField(),
   ],
+  slug: "categories",
 };

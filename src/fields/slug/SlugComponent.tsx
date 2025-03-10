@@ -1,11 +1,11 @@
 "use client";
-import React, { useCallback, useEffect } from "react";
-import { TextFieldClientProps } from "payload";
+import "./index.scss";
 
-import { useField, Button, TextInput, FieldLabel, useFormFields, useForm } from "@payloadcms/ui";
+import { Button, FieldLabel, TextInput, useField, useForm, useFormFields } from "@payloadcms/ui";
+import { TextFieldClientProps } from "payload";
+import React, { useCallback, useEffect } from "react";
 
 import { formatSlug } from "./formatSlug";
-import "./index.scss";
 
 type SlugComponentProps = {
   fieldToUse: string;
@@ -57,8 +57,8 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
       e.preventDefault();
 
       dispatchFields({
-        type: "UPDATE",
         path: checkboxFieldPath,
+        type: "UPDATE",
         value: !checkboxValue,
       });
     },

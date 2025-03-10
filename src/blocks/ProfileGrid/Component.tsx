@@ -1,6 +1,7 @@
-import type { ProfileGridBlock as ProfileGridBlockProps } from "@/payload-types";
 import Image from "next/image";
 import React from "react";
+
+import type { ProfileGridBlock as ProfileGridBlockProps } from "@/payload-types";
 
 export const ProfileGridBlock: React.FC<ProfileGridBlockProps> = ({ heading, items }) => {
   const getUsernameFromUrl = (url: string): string | null => {

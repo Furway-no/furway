@@ -1,21 +1,16 @@
-import type { Block } from "payload";
-
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
+import type { Block } from "payload";
 
 import { linkGroup } from "../../fields/linkGroup";
 
 export const CallToAction: Block = {
-  slug: "cta",
-  interfaceName: "CallToActionBlock",
   fields: [
     {
-      name: "richText",
-      type: "richText",
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
           return [
@@ -27,6 +22,8 @@ export const CallToAction: Block = {
         },
       }),
       label: false,
+      name: "richText",
+      type: "richText",
     },
     linkGroup({
       appearances: ["default", "outline"],
@@ -35,8 +32,10 @@ export const CallToAction: Block = {
       },
     }),
   ],
+  interfaceName: "CallToActionBlock",
   labels: {
     plural: "Calls to Action",
     singular: "Call to Action",
   },
+  slug: "cta",
 };

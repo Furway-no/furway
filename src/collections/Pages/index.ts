@@ -1,17 +1,3 @@
-import type { CollectionConfig } from "payload";
-
-import { administratorOrPublished } from "../../access/administratorOrPublished";
-import { Archive } from "../../blocks/ArchiveBlock/config";
-import { CallToAction } from "../../blocks/CallToAction/config";
-import { Content } from "../../blocks/Content/config";
-import { FormBlock } from "../../blocks/Form/config";
-import { MediaBlock } from "../../blocks/MediaBlock/config";
-import { hero } from "@/heros/config";
-import { slugField } from "@/fields/slug";
-import { populatePublishedAt } from "../../hooks/populatePublishedAt";
-import { generatePreviewPath } from "../../utilities/generatePreviewPath";
-import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
-
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -19,33 +5,39 @@ import {
   OverviewField,
   PreviewField,
 } from "@payloadcms/plugin-seo/fields";
-import { ProfileGrid } from "@/blocks/ProfileGrid/config";
+import type { CollectionConfig } from "payload";
+
 import { administrator } from "@/access/administrator";
+import { ProfileGrid } from "@/blocks/ProfileGrid/config";
+import { slugField } from "@/fields/slug";
+import { hero } from "@/heros/config";
 import { populatePublishedBy } from "@/hooks/populatePublishedBy";
 
+import { administratorOrPublished } from "../../access/administratorOrPublished";
+import { Archive } from "../../blocks/ArchiveBlock/config";
+import { CallToAction } from "../../blocks/CallToAction/config";
+import { Content } from "../../blocks/Content/config";
+import { FormBlock } from "../../blocks/Form/config";
+import { MediaBlock } from "../../blocks/MediaBlock/config";
+import { populatePublishedAt } from "../../hooks/populatePublishedAt";
+import { generatePreviewPath } from "../../utilities/generatePreviewPath";
+import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
+
 export const Pages: CollectionConfig<"pages"> = {
-  slug: "pages",
   access: {
     create: administrator,
     delete: administrator,
     read: administratorOrPublished,
     update: administrator,
   },
-  // This config controls what's populated by default when a page is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'pages'>
-  defaultPopulate: {
-    title: true,
-    slug: true,
-  },
   admin: {
     defaultColumns: ["title", "slug", "updatedAt"],
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
-          slug: typeof data?.slug === "string" ? data.slug : "",
           collection: "pages",
           req,
+          slug: typeof data?.slug === "string" ? data.slug : "",
         });
 
         return path;
@@ -53,20 +45,28 @@ export const Pages: CollectionConfig<"pages"> = {
     },
     preview: (data, { req }) =>
       generatePreviewPath({
-        slug: typeof data?.slug === "string" ? data.slug : "",
         collection: "pages",
         req,
+        slug: typeof data?.slug === "string" ? data.slug : "",
       }),
     useAsTitle: "title",
   },
+
+  // This config controls what's populated by default when a page is referenced
+  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
+  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'pages'>
+  defaultPopulate: {
+    slug: true,
+    title: true,
+  },
+
   fields: [
     {
       name: "title",
-      type: "text",
       required: true,
+      type: "text",
     },
     {
-      type: "tabs",
       tabs: [
         {
           fields: [hero],
@@ -75,25 +75,23 @@ export const Pages: CollectionConfig<"pages"> = {
         {
           fields: [
             {
-              name: "layout",
-              type: "blocks",
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, ProfileGrid],
-              required: true,
               admin: {
                 initCollapsed: true,
               },
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, ProfileGrid],
+              name: "layout",
+              required: true,
+              type: "blocks",
             },
           ],
           label: "Content",
         },
         {
-          name: "meta",
-          label: "SEO",
           fields: [
             OverviewField({
-              titlePath: "meta.title",
               descriptionPath: "meta.description",
               imagePath: "meta.image",
+              titlePath: "meta.title",
             }),
             MetaTitleField({
               hasGenerateFn: true,
@@ -104,41 +102,45 @@ export const Pages: CollectionConfig<"pages"> = {
 
             MetaDescriptionField({}),
             PreviewField({
+              descriptionPath: "meta.description",
+
               // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
               // field paths to match the target field for data
               titlePath: "meta.title",
-              descriptionPath: "meta.description",
             }),
           ],
+          label: "SEO",
+          name: "meta",
         },
       ],
+      type: "tabs",
     },
     {
+      admin: {
+        position: "sidebar",
+      },
       name: "publishedAt",
       type: "date",
-      admin: {
-        position: "sidebar",
-      },
     },
     {
-      name: "publishedBy",
-      type: "relationship",
-      relationTo: "users",
       admin: {
+        condition: (data) => Boolean(data?.publishedBy),
         position: "sidebar",
         readOnly: true,
-        condition: (data) => Boolean(data?.publishedBy),
       },
+      name: "publishedBy",
+      relationTo: "users",
+      type: "relationship",
     },
     ...slugField(),
   ],
   hooks: {
     afterChange: [revalidatePage],
-    beforeChange: [populatePublishedAt, populatePublishedBy],
     afterDelete: [revalidateDelete],
+    beforeChange: [populatePublishedAt, populatePublishedBy],
   },
+  slug: "pages",
   versions: {
     drafts: {
       autosave: {

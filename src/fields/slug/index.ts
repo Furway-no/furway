@@ -13,39 +13,39 @@ export const slugField: Slug = (fieldToUse = "title", overrides = {}) => {
   const { slugOverrides, checkboxOverrides } = overrides;
 
   const checkBoxField: CheckboxField = {
-    name: "slugLock",
-    type: "checkbox",
-    defaultValue: true,
     admin: {
       hidden: true,
       position: "sidebar",
     },
+    defaultValue: true,
+    name: "slugLock",
+    type: "checkbox",
     ...checkboxOverrides,
   };
 
   // @ts-expect-error - ts mismatch Partial<TextField> with TextField
   const slugField: TextField = {
-    name: "slug",
-    type: "text",
     index: true,
     label: "Slug",
+    name: "slug",
+    type: "text",
     ...(slugOverrides || {}),
-    hooks: {
-      // Kept this in for hook or API based updates
-      beforeValidate: [formatSlugHook(fieldToUse)],
-    },
     admin: {
       position: "sidebar",
       ...(slugOverrides?.admin || {}),
       components: {
         Field: {
-          path: "@/fields/slug/SlugComponent#SlugComponent",
           clientProps: {
-            fieldToUse,
             checkboxFieldPath: checkBoxField.name,
+            fieldToUse,
           },
+          path: "@/fields/slug/SlugComponent#SlugComponent",
         },
       },
+    },
+    hooks: {
+      // Kept this in for hook or API based updates
+      beforeValidate: [formatSlugHook(fieldToUse)],
     },
   };
 
