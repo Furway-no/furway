@@ -1,6 +1,4 @@
-"use client";
-import { useHeaderTheme } from "@/providers/HeaderTheme";
-import React, { useEffect } from "react";
+import React from "react";
 
 import type { Page } from "@/payload-types";
 
@@ -14,12 +12,6 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({
   richText,
   backgroundOpacity,
 }) => {
-  // const { setHeaderTheme } = useHeaderTheme()
-
-  //  useEffect(() => {
-  //    setHeaderTheme('dark')
-  //  })
-
   const opacityValue = Math.min(100, Math.max(0, backgroundOpacity ?? 100)) / 100;
 
   return (
