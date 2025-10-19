@@ -6,8 +6,6 @@ import {
   ATTR_SERVICE_NAMESPACE,
 } from "@opentelemetry/semantic-conventions/incubating";
 import { OTLPHttpJsonTraceExporter, registerOTel } from "@vercel/otel";
-import { randomUUID } from "crypto";
-import os from "os";
 
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ERROR);
 
@@ -16,7 +14,7 @@ export function register() {
     attributes: {
       [ATTR_DEPLOYMENT_ENVIRONMENT_NAME]: process.env.NODE_ENV || "development",
       [ATTR_SERVICE_INSTANCE_ID]:
-        process.env.OTEL_SERVICE_INSTANCE_ID || `${os.hostname()}-${randomUUID().slice(0, 8)}`,
+        process.env.OTEL_SERVICE_INSTANCE_ID || `id-${Math.random().toString(36).slice(2, 10)}`,
       [ATTR_SERVICE_NAMESPACE]: process.env.OTEL_SERVICE_NAMESPACE || "furway.no",
       [ATTR_SERVICE_VERSION]: process.env.npm_package_version || "unknown",
     },
